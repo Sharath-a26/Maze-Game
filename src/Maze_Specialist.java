@@ -109,10 +109,10 @@ public class Maze_Specialist {
 					}
 					
 				}
-				System.out.println(poss_path.toString());
+				System.out.println(poss_path.toString()); //printing poss_path
 					
 			}
-			
+
 		}
 		return possible;
 		
