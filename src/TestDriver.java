@@ -54,6 +54,9 @@ public class TestDriver {
 		System.out.println("");
 		System.out.println(runner.calculateDistance() + " meters");
 		Maze_Specialist specialist = new Maze_Specialist();
-		System.out.println(specialist.calculateIsPossible(blocked, notblocked));
+		specialist.findPaths(blocked, notblocked);
+		specialist.setRunnerData(runner);
+		runner.setDifference(specialist);
+
 	}
 }

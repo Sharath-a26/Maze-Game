@@ -4,7 +4,7 @@ public class Maze {
 	private final int noOfCells = 36;
 	private ArrayList<Cells> block_cells;
 	private ArrayList<Cells> path_cells;
-	private ArrayList<Cells> changed_blocks;
+
 	
 	public Maze(ArrayList<Cells> block_cells,ArrayList<Cells> path_cells) 
 	{
@@ -26,10 +26,7 @@ public class Maze {
 		return path_cells;
 	}
 	
-	public ArrayList<Cells> getChangedBlocks() {
-		return changed_blocks;
-	}
-	
+
 	public void setAll(ArrayList<Cells> block_cells,ArrayList<Cells> path_cells) {
 
 		this.block_cells = block_cells;
@@ -37,16 +34,13 @@ public class Maze {
 	}
 	
 	public void setChangedBlock(ArrayList<Cells> changed_blocks) {
-		if(!(new Maze_Specialist().calculateIsPossible(this.getBlockCells(),this.getPathCells())))
+		if(!(new Maze_Specialist().calculateIsPossible(this)))
 		{
-			System.out.println("Blocks position is invalid");
-			this.changeBlock();
+			System.out.println("Blocks positions are invalid");
+
 		}
 		
 	}
 	
-	public void changeBlock() {
-		
-		
-	}
+
 }

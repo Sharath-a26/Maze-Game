@@ -34,12 +34,20 @@ public class Maze_Runner {
 		this.move = move;
 	}
 	
-	public void setStatus(boolean selected_status) {
-		this.selected_status = selected_status;
+	public void setStatus() {
+		if(this.distance_difference < 1.0)
+			this.selected_status = true;
+		else
+			this.selected_status = false;
 	}
 	
 	public Cells getDestroyedBlock() {
 		return destroyed_blocks;
+	}
+
+	public void setDifference(Maze_Specialist m1) {
+		this.distance_difference = m1.calculateDifference();
+		System.out.println(this.distance_difference);
 	}
 	
 	public LinkedList<Cells> calculatePath(Cells c[]) {
