@@ -1,0 +1,86 @@
+import java.util.*;
+
+public class Maze_Runner {
+	private String[] move;
+	private Cells destroyed_blocks;
+	private boolean isMovePossible;
+	private LinkedList<Cells> path = new LinkedList<>();
+	private double distance;
+	private double distance_difference;
+	private int score;
+	private boolean selected_status;
+	
+	
+	
+	public void setDestroyedBlock(Cells destroyed_blocks) {
+		this.destroyed_blocks = destroyed_blocks;
+	}
+	
+	public boolean calculateMovePossible(Cells c[],int t,String i) {
+		boolean x = true;
+		
+			if(i.equals("right") && (c[t].getIsBlocked() && c[t].equals(destroyed_blocks) || !(c[t].getIsBlocked())))
+				x = true;
+			else if(i.equals("diagonal") && ((c[t].getIsBlocked() && (c[t].equals(destroyed_blocks)) || !(c[t].getIsBlocked()))  || ((c[t+5].getIsBlocked() && c[t+5].equals(destroyed_blocks)) || !(c[t+5].getIsBlocked())))) 
+				x = true;
+			else if(i.equals("down") && (c[t+5].getIsBlocked() && c[t+5].equals(destroyed_blocks) || !(c[t+5].getIsBlocked())))
+				x = true;
+			else x = false;
+		
+		return x;
+	}
+	
+	public void setMove(String[] move) {
+		this.move = move;
+	}
+	
+	public void setStatus(boolean selected_status) {
+		this.selected_status = selected_status;
+	}
+	
+	public Cells getDestroyedBlock() {
+		return destroyed_blocks;
+	}
+	
+	public LinkedList<Cells> calculatePath(Cells c[]) {
+		int t = 1;
+		path.add(c[t-1]);
+		for(String i : move)
+		{
+			if(i.equals("diagonal") && calculateMovePossible(c,t,i))
+			{
+				t += 7;
+				path.add(c[t-1]);
+			}
+			else if(i.equals("right") && calculateMovePossible(c,t,i))
+			{
+				t += 1;
+				path.add(c[t-1]);
+			}
+			else if(i.equals("down") && calculateMovePossible(c,t,i))
+			{
+				t += 6;
+				path.add(c[t-1]);
+			}
+			else if(i.equals("up") && calculateMovePossible(c,t,i))
+			{
+				t -= 6;
+				path.add(c[t-1]);
+			}
+				
+		}
+		
+		return path;
+	}
+	
+	
+	
+	public double calculateDistance() {
+		double sum1 = 0.0;
+		for(int i = 0; i < path.size()-1;i++)
+			sum1 += Math.pow(Math.pow(path.get(i+1).getCoordinate().get(0)- path.get(i).getCoordinate().get(0),2.0) + Math.pow(path.get(i+1).getCoordinate().get(1)- path.get(i).getCoordinate().get(1),2.0),0.5);
+		distance = sum1;			
+		return distance;
+	}
+	
+}
