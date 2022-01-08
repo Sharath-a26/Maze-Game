@@ -29,7 +29,8 @@ public class Cells {
 	public void setCellMap(HashMap<ArrayList<Integer>,Integer> cellmap) {
 		this.cellmap = cellmap;
 	}
-	public void isDestroyed(boolean isdestroyed) {
+	
+	public void setIsDestroyed(boolean isdestroyed) {
 		this.isdestroyed = isdestroyed;
 	}
 	

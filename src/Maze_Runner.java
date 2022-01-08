@@ -7,7 +7,7 @@ public class Maze_Runner {
 	private LinkedList<Cells> path = new LinkedList<>();
 	private double distance;
 	private double distance_difference;
-	private int score;
+	public int score;
 	private boolean selected_status;
 	
 	
@@ -34,12 +34,12 @@ public class Maze_Runner {
 		this.move = move;
 	}
 	
-	public void setStatus() {
-		if(this.distance_difference < 1.0)
-			this.selected_status = true;
-		else
-			this.selected_status = false;
+	public void setStatus()
+	{
+		this.selected_status = (this.score >= 8);
 	}
+
+
 	
 	public Cells getDestroyedBlock() {
 		return destroyed_blocks;
@@ -47,7 +47,7 @@ public class Maze_Runner {
 
 	public void setDifference(Maze_Specialist m1) {
 		this.distance_difference = m1.calculateDifference();
-		System.out.println(this.distance_difference);
+		System.out.println("\nDifference of Runner's path from shortest path\n" + this.distance_difference);
 	}
 	
 	public LinkedList<Cells> calculatePath(Cells c[]) {
@@ -90,5 +90,8 @@ public class Maze_Runner {
 		distance = sum1;			
 		return distance;
 	}
-	
+
+	public double getDifference() {
+		return this.distance_difference;
+	}
 }

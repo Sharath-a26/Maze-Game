@@ -33,7 +33,7 @@ public class Maze {
 		this.path_cells = path_cells;
 	}
 	
-	public void setChangedBlock(ArrayList<Cells> changed_blocks) {
+	public void setChangedBlock() {
 		if(!(new Maze_Specialist().calculateIsPossible(this)))
 		{
 			System.out.println("Blocks positions are invalid");

@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Maze_Specialist {
 	private Maze_Runner runner_data;
@@ -14,16 +15,22 @@ public class Maze_Specialist {
 	}
 	
 	public boolean calculateIsPossible(Maze m1) {
-		if(m1.getBlockCells().size() > 6)
-			this.ispossible=  false;
-		else
-			this.ispossible =  true;
-		return this.ispossible;
-		
+
+			this.ispossible=  m1.getBlockCells().size() > 6;
+			return this.ispossible;
 	}
 	
-	public void calculateScore(Maze m1, Maze_Runner runner) {
-		
+	public void calculateScore() {
+		if(runner_data.getDifference() == 0.0)
+			runner_data.score = 10;
+		else if(runner_data.getDifference() > 0.0 && runner_data.getDifference() <= 0.5)
+			runner_data.score = 9;
+		else if(runner_data.getDifference() > 0.5 && runner_data.getDifference() <= 1.0)
+			runner_data.score = 8;
+		else
+			runner_data.score = 0;
+
+		System.out.println("Player Score : " + runner_data.score);
 	}
 	
 	public double calculateDifference() {
@@ -32,7 +39,10 @@ public class Maze_Specialist {
 	}
 	
 	public void setRearrangedBlocks(ArrayList<Cells> rearranged_blocks) {
+		if(!this.ispossible)
 		this.rearranged_blocks = rearranged_blocks;
+		else
+			this.rearranged_blocks = null;
 	}
 	
 	public void findPaths(ArrayList<Cells> a1, ArrayList<Cells> a2) {
@@ -146,11 +156,13 @@ public class Maze_Specialist {
 
 			}
 
+		System.out.println("\nShort Paths for Each Destroyed Block\n");
 			for(int i = 0; i < 6;i++)
-				System.out.println("Destroyed Block : " + a1.get(i).getCellNo() + " " + "Path : " + this.shortest_paths.get(i).toString());
+				System.out.println("Destroyed Block : " + a1.get(i).getCellNo() + " " + ", Path : " + this.shortest_paths.get(i).stream().map(Object::toString).collect(Collectors.joining(" -> ")));
 		System.out.println("\n");
 
 			ArrayList<Double> distances = new ArrayList<>();
+		System.out.println("\nEuclidean Distances of Start to Target for Each case : \n");
 			for(int i = 0; i < this.shortest_paths.size(); i++)
 			{
 				double sum1 = 0.0;
@@ -164,6 +176,8 @@ public class Maze_Specialist {
 				distances.add(sum1);
 			}
 			Collections.sort(distances);
+
+
 		System.out.println("\n Shortest Distance : " + distances.get(0));
 		Maze_Specialist.shortest_distance = distances.get(0);
 
