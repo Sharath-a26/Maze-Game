@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Maze_Runner {
-	private String[] move;
+	private ArrayList<String> move;
 	private Cells destroyed_blocks;
 	private boolean isMovePossible;
 	private LinkedList<Cells> path = new LinkedList<>();
@@ -30,7 +30,7 @@ public class Maze_Runner {
 		return x;
 	}
 	
-	public void setMove(String[] move) {
+	public void setMove(ArrayList<String> move) {
 		this.move = move;
 	}
 	
